@@ -918,6 +918,18 @@ class RecipeService
     }
 
     /**
+     * Get all recipes of a certain category
+     *
+     * @param string $tag
+     *
+     * @return array
+     */
+    public function getRecipesByTag($tag)
+    {
+        return $this->db->getRecipesByTag($tag, $this->user_id);
+    }
+
+    /**
      * Search for recipes by keywords
      *
      * @param string $keywords

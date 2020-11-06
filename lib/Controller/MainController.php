@@ -196,6 +196,34 @@ class MainController extends Controller
      * @NoAdminRequired
      * @NoCSRFRequired
      */
+    public function tag($tag)
+    {
+        $this->dbCacheService->triggerCheck();
+        
+        $tag = urldecode($tag);
+        try {
+			$recipes = $this->service->getRecipesByTag($tag);
+			foreach ($recipes as $i => $recipe) {
+                $recipes[$i]['imageUrl'] = $this->urlGenerator->linkToRoute(
+                    'cookbook.recipe.image',
+                    [
+                        'id' => $recipe['recipe_id'],
+                        'size' => 'thumb',
+                        't' => $this->service->getRecipeMTime($recipe['recipe_id'])
+                    ]
+                );
+			}
+
+            return new DataResponse($recipes, Http::STATUS_OK, ['Content-Type' => 'application/json']);
+        } catch (\Exception $e) {
+            return new DataResponse($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function recipe($id)
     {
         $this->dbCacheService->triggerCheck();

@@ -237,6 +237,31 @@ class RecipeDb {
     
     /**
      * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+     *
+     */
+    public function getRecipesByTag(string $tag, string $user_id)
+    {
+        $qb = $this->db->getQueryBuilder();
+        
+        $qb->select('r.recipe_id', 'r.name')
+            ->from(self::DB_TABLE_RECIPES, 'r')
+            ->innerJoin('r', self::DB_TABLE_KEYWORDS, 'k', 'k.recipe_id = r.recipe_id')
+            ->where('k.name = :keyword')
+            ->andWhere('r.user_id = :user')
+            ->orderBy('r.name');
+        
+        $qb->setParameter('keyword', $tag, TYPE::STRING);
+        $qb->setParameter('user', $user_id, TYPE::STRING);
+        
+        $cursor = $qb->execute();
+        $result = $cursor->fetchAll();
+        $cursor->closeCursor();
+        
+        return $this->unique($result);
+    }
+    
+    /**
+     * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
      */
     public function findRecipes(array $keywords, string $user_id) {
         $has_keywords = $keywords && is_array($keywords) && sizeof($keywords) > 0 && $keywords[0];

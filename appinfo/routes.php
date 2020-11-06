@@ -26,6 +26,7 @@ return [
 	   ['name' => 'config#config', 'url' => '/config', 'verb' => 'POST'],
 	   /* API routes */
 	   ['name' => 'main#category', 'url' => '/api/category/{category}', 'verb' => 'GET'],
+	   ['name' => 'main#tag', 'url' => '/api/tag/{tag}', 'verb' => 'GET'],
 	   ['name' => 'main#search', 'url' => '/api/search/{query}', 'verb' => 'GET'],
    ],
 
