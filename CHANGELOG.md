@@ -37,6 +37,8 @@
   [#393](https://github.com/nextcloud/cookbook/pull/393) @christianlupus
 - Support for dateCreated and dateModified field of schema.org Recipe
   [#377](https://github.com/nextcloud/cookbook/pull/366/) @seyfeb
+- Nutrition information display and editing
+  [#416](https://github.com/nextcloud/cookbook/pull/416/) @seyfeb
 
 ### Changed
 - Switch of project ownership to neextcloud organization in GitHub
