@@ -89,8 +89,9 @@ class RecipeController extends Controller {
 	public function update($id) {
 		$this->dbCacheService->triggerCheck();
 		
-		$recipeData = [];
-		parse_str(file_get_contents("php://input"), $recipeData);
+		$dataIn = file_get_contents('php://input');
+		$recipeData = json_decode($dataIn, true);
+		
 		$file = $this->service->addRecipe($recipeData);
 		$this->dbCacheService->addRecipe($file);
 
@@ -110,7 +111,9 @@ class RecipeController extends Controller {
 	public function create() {
 		$this->dbCacheService->triggerCheck();
 		
-		$recipeData = $_POST;
+		$dataIn = file_get_contents('php://input');
+		$recipeData = json_decode($dataIn, true);
+		
 		$file = $this->service->addRecipe($recipeData);
 		$this->dbCacheService->addRecipe($file);
 
