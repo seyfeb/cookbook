@@ -10,8 +10,11 @@ import VueRouter from 'vue-router'
 import Index from '../components/AppIndex'
 import NotFound from '../components/NotFound'
 import RecipeView from '../components/RecipeView'
-import RecipeEdit from '../components/RecipeEdit'
+// import RecipeEdit from '../components/RecipeEdit'
 import Search from '../components/SearchResults'
+
+const RecipeEdit = () => import('../components/RecipeEdit.vue')
+// import RecipeEdit from '../components/RecipeEdit'
 
 Vue.use(VueRouter)
 
