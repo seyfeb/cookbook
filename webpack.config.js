@@ -15,9 +15,10 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './js'),
-        publicPath: '/js/',
+        // publicPath: '/js/',
         filename: '[name].js',
-        chunkFilename: '[name].js?v=[contenthash]',
+        // chunkFilename: '[name].js?v=[contenthash]',
+        chunkFilename: 'chunks/cookbook.[name].js?v=[contenthash]',
     },
     module: {
         rules: [
@@ -47,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.(eot|woff|woff2|ttf)$/,
-                loaders: 'file-loader',
+                loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]?[hash]'
                 },
@@ -79,5 +80,29 @@ module.exports = {
         ],
         symlinks: false,
     },
+    optimization: {
+        splitChunks: {
+          chunks: 'async',
+          minSize: 30000,
+          maxSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 3,
+          automaticNameDelimiter: '~',
+          automaticNameMaxLength: 30,
+          name: true,
+          cacheGroups: {
+            vendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10
+            },
+            default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true
+            }
+          }
+        }
+      }
 
 }
