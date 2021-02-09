@@ -15,7 +15,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './js'),
-        // publicPath: '/js/',
+        publicPath: '/js/',
         filename: '[name].js',
         // chunkFilename: '[name].js?v=[contenthash]',
         chunkFilename: 'chunks/cookbook.[name].js?v=[contenthash]',
