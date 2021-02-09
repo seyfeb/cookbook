@@ -11,6 +11,8 @@ import Vue from 'vue'
 import router from './router'
 import store from './store'
 
+import { generateFilePath } from '@nextcloud/router'
+
 //import AppNavi from './components/AppNavi'
 import AppMain from './components/AppMain'
 
@@ -18,6 +20,9 @@ import AppMain from './components/AppMain'
 import VueShowdown from 'vue-showdown'
 import Editor from 'v-markdown-editor'
 import 'v-markdown-editor/dist/v-markdown-editor.css'
+
+// eslint-disable-next-line camelcase
+__webpack_public_path__ = generateFilePath('cookbook', '', 'js/');
 
 (function (OC, window) {
     'use strict'
